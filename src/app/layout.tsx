@@ -1,8 +1,29 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
+import Header from '@/components/header/Header';
 
-const inter = Inter({ subsets: ['latin'] });
+const kollektif = localFont({
+  src: [
+    {
+      path: '../../public/fonts/Kollektif/Kollektif.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/Kollektif/Kollektif-Bold.ttf',
+      weight: '700',
+      style: 'bold',
+    },
+  ],
+  variable: '--font-kollektif',
+});
+
+const norwester = localFont({
+  src: '../../public/fonts/Norwester/norwester.otf',
+  display: 'swap',
+  variable: '--font-norwester',
+});
 
 export const metadata: Metadata = {
   title: 'Reading Manager',
@@ -16,7 +37,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${kollektif.variable} ${norwester.variable} bg-gray-50`}
+        style={{
+          fontFamily: 'var(--font-kollektif)',
+        }}
+      >
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

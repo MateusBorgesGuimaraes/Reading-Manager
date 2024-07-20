@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .container {
+    max-width: 73.75rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
