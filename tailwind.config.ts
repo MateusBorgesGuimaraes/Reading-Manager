@@ -7,9 +7,6 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    // screens: {
-    //   container: '1180px',
-    // },
     extend: {
       maxWidth: {
         customScreenSize: '73.75rem',
@@ -17,6 +14,9 @@ const config: Config = {
       fontFamily: {
         body: ['Kollektif', 'sans-serif'],
         title: ['Norwester', 'sans-serif'],
+      },
+      screens: {
+        smallest: '480px',
       },
     },
   },

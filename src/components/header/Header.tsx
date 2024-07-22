@@ -7,7 +7,7 @@ import React from 'react';
 export default function Header() {
   const [loginActive, setLoginActive] = React.useState(false);
   const [mobileActive, setMobileActive] = React.useState(false);
-  const login = true;
+  const login = false;
 
   return (
     <header className="container flex justify-between items-center mt-4">
@@ -99,13 +99,13 @@ export default function Header() {
           <>
             <Link
               href={'./'}
-              className="text-green-600 hover:text-green-500 duration-300"
+              className="text-green-600 hover:text-green-500 duration-300 text-lg"
             >
               LOGAR
             </Link>
             <Link
               href={'./'}
-              className="bg-green-600 px-4 py-3 rounded-lg text-white hover:bg-green-500 duration-300"
+              className="bg-green-600 px-3 py-2 rounded-lg text-white hover:bg-green-500 duration-300 text-lg"
             >
               INSCREVER-SE
             </Link>
