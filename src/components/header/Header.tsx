@@ -98,13 +98,13 @@ export default function Header() {
         ) : (
           <>
             <Link
-              href={'./'}
+              href={'/login'}
               className="text-green-600 hover:text-green-500 duration-300 text-lg"
             >
               LOGAR
             </Link>
             <Link
-              href={'./'}
+              href={'/login/criar'}
               className="bg-green-600 px-3 py-2 rounded-lg text-white hover:bg-green-500 duration-300 text-lg"
             >
               INSCREVER-SE
@@ -152,18 +152,30 @@ export default function Header() {
             </Link>
           </li>
 
-          {login && (
+          {login ? (
             <li className="group bg-green-600 text-white rounded text-xl hover:bg-green-500 duration-300">
-              <Link
-                href={'#'}
-                className="flex items-center justify-between px-3 py-1 "
-              >
-                sair
+              <button className="flex items-center justify-between w-full px-3 py-1 ">
+                <p>sair</p>
                 <Image
                   src={'/assets/icons/logout.svg'}
                   width={24}
                   height={24}
-                  alt="logut icon"
+                  alt="logout icon"
+                />
+              </button>
+            </li>
+          ) : (
+            <li className="group bg-green-600 text-white rounded text-base hover:bg-green-500 duration-300">
+              <Link
+                href={'/login'}
+                className="flex items-center justify-between px-3 py-1 "
+              >
+                entrar/cadastrar
+                <Image
+                  src={'/assets/icons/login-white.svg'}
+                  width={24}
+                  height={24}
+                  alt="login icon"
                 />
               </Link>
             </li>
