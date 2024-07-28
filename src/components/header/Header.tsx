@@ -1,5 +1,7 @@
 'use client';
 
+import logout from '@/actions/logout';
+import { useUser } from '@/context/user-context';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -7,7 +9,12 @@ import React from 'react';
 export default function Header() {
   const [loginActive, setLoginActive] = React.useState(false);
   const [mobileActive, setMobileActive] = React.useState(false);
-  const login = false;
+  const { user, setUser } = useUser();
+
+  async function handlLeogout() {
+    await logout();
+    setUser(null);
+  }
 
   return (
     <header className="container flex justify-between items-center mt-4">
@@ -32,7 +39,7 @@ export default function Header() {
             <a href="#" className="flex items-center gap-1">
               {' '}
               <span className="w-3 h-3 bg-green-800 block rounded-full group-hover:bg-green-400 duration-300"></span>
-              minhas leituras
+              minha conta
             </a>
           </li>
           <li className="group text-gray-800">
@@ -45,7 +52,7 @@ export default function Header() {
       </nav>
 
       <div className="gap-4 font-title text-xl items-center md:flex hidden">
-        {login ? (
+        {user ? (
           <ul className="text-green-600 hover:text-green-500 duration-300">
             <li
               onClick={() => setLoginActive(!loginActive)}
@@ -58,7 +65,7 @@ export default function Header() {
                   height={24}
                   alt="avatar de login"
                 />{' '}
-                <p className="font-body text-green-700">mateus</p>{' '}
+                <p className="font-body text-green-700">{user.username}</p>{' '}
                 <Image
                   src={'/assets/icons/arrow-down-header.svg'}
                   width={24}
@@ -75,17 +82,17 @@ export default function Header() {
                 } flex-col gap-3 absolute bg-white right-0 w-max px-6 py-3 shadow-sm rounded-lg`}
               >
                 <li className="group">
-                  <Link
-                    href={'#'}
+                  <button
+                    onClick={handlLeogout}
                     className="flex items-center gap-1 text-green-700"
                   >
                     <span className="w-3 h-3 bg-green-800 block rounded-full group-hover:bg-green-400 duration-300"></span>
                     logout
-                  </Link>
+                  </button>
                 </li>
                 <li className="group">
                   <Link
-                    href={'#'}
+                    href={'/conta'}
                     className="flex items-center gap-1 text-green-700"
                   >
                     <span className="w-3 h-3 bg-green-800 block rounded-full group-hover:bg-green-400 duration-300"></span>
@@ -132,14 +139,14 @@ export default function Header() {
           } flex-col gap-4 bg-white shadow-sm w-full px-8 py-5 min-w-60 absolute right-0 text-green-700 rounded-lg`}
         >
           <li className="group">
-            <Link href={'#'} className="flex gap-1 items-center">
+            <Link href={'/'} className="flex gap-1 items-center">
               <span className="w-3 h-3 bg-green-800 block rounded-full group-hover:bg-green-400 duration-300"></span>
               inicio
             </Link>
           </li>
 
           <li className="group">
-            <Link href={'#'} className="flex gap-1 items-center">
+            <Link href={'/conta'} className="flex gap-1 items-center">
               <span className="w-3 h-3 bg-green-800 block rounded-full group-hover:bg-green-400 duration-300"></span>
               minha conta
             </Link>
@@ -152,7 +159,7 @@ export default function Header() {
             </Link>
           </li>
 
-          {login ? (
+          {user ? (
             <li className="group bg-green-600 text-white rounded text-xl hover:bg-green-500 duration-300">
               <button className="flex items-center justify-between w-full px-3 py-1 ">
                 <p>sair</p>

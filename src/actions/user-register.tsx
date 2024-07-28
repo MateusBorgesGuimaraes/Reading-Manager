@@ -1,11 +1,11 @@
 'use server';
 
-import { USER_POST } from '@/functions/api';
+import { USER_POST_REGISTER } from '@/functions/api';
 import { cookies } from 'next/headers';
 
-export default async function userPost(data: any) {
+export default async function userRegister(data: any) {
   try {
-    const { url } = USER_POST();
+    const { url } = USER_POST_REGISTER();
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -13,6 +13,7 @@ export default async function userPost(data: any) {
       },
       body: JSON.stringify(data),
     });
+
     if (!response.ok) {
       const errorData = await response.json();
       return {
@@ -24,6 +25,8 @@ export default async function userPost(data: any) {
 
     const dataRes = await response.json();
 
+    console.log(dataRes);
+
     cookies().set('token', dataRes.token, {
       httpOnly: true,
       secure: true,
@@ -34,6 +37,6 @@ export default async function userPost(data: any) {
     return { data: dataRes, ok: true, error: '' };
   } catch (error: unknown) {
     console.log(error);
-    return { data: null, ok: false, error: 'Erro ao logar' };
+    return { data: null, ok: false, error: 'Erro ao criar conta' };
   }
 }
