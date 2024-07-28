@@ -9,6 +9,7 @@ export default function TitleDec({ text }: { text: string }) {
         height={21}
         width={200}
         alt="decoração"
+        className="w-40 h-[1.0625rem] smallest:w-[12.5rem] smallest:h-[1.3125rem]"
       />
     </div>
   );

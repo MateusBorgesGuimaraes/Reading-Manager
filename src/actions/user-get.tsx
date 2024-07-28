@@ -11,7 +11,7 @@ export default async function userGet() {
     if (!token) throw new Error('Token não encontrado');
 
     const { url } = USER_GET();
-    console.log('URL:', url);
+
     const response = await fetch(url, {
       method: 'GET',
       headers: {

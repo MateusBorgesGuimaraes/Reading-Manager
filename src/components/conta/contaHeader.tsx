@@ -29,12 +29,12 @@ export default function ContaHeader() {
   const pathname = usePathname();
 
   return (
-    <nav className=" smallest:my-0 my-4">
-      <ul className="flex justify-between">
-        <div className="mt-4">
+    <nav className="my-4">
+      <ul className="flex sm:justify-between sm:flex-row flex-col">
+        <div className="sm:mt-2 sm:mb-0 mb-2  self-center">
           <TitleDec text={defineTitle(pathname)} />
         </div>
-        <div className="flex smallest:gap-6  smallest:justify-end justify-evenly">
+        <div className="flex smallest:gap-6 gap-6 justify-evenly">
           <ButtonContaHeader
             pathname={pathname}
             link="/conta"

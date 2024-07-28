@@ -25,8 +25,6 @@ export default async function userRegister(data: any) {
 
     const dataRes = await response.json();
 
-    console.log(dataRes);
-
     cookies().set('token', dataRes.token, {
       httpOnly: true,
       secure: true,
