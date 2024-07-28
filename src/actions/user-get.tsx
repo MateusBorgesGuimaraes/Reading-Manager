@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 export default async function userGet() {
   try {
     const token = cookies().get('token')?.value;
-    console.log('Token:', token);
+
     if (!token) throw new Error('Token não encontrado');
 
     const { url } = USER_GET();
@@ -21,7 +21,7 @@ export default async function userGet() {
         revalidate: 60,
       },
     });
-    console.log('Response status:', response.status);
+
     if (!response.ok) {
       const errorData = await response.json();
       return {

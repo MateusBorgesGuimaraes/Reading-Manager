@@ -26,7 +26,7 @@ export default async function Hero() {
             />
 
             <div className="max-w-[300px] lg:min-w-[300px]">
-              <ButtonLink link="#" text="GET STARTED" />
+              <ButtonLink link="/login" text="GET STARTED" />
             </div>
           </div>
 

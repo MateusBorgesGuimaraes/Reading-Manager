@@ -36,7 +36,7 @@ export default function Header() {
             </a>
           </li>
           <li className="group text-gray-800">
-            <a href="#" className="flex items-center gap-1">
+            <a href="/conta" className="flex items-center gap-1">
               {' '}
               <span className="w-3 h-3 bg-green-800 block rounded-full group-hover:bg-green-400 duration-300"></span>
               minha conta
