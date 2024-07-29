@@ -10,5 +10,5 @@ export type UserAPI = {
   username: string;
   email: string;
   // token: string;
-  folders: FolderAPI[];
+  // folders: FolderAPI[];
 };

@@ -17,7 +17,6 @@ const ColorRadioButton: React.FC<ColorRadioButtonProps> = ({
   label,
   register,
 }) => {
-  console.log(color);
   return (
     <div className="flex items-center cursor-pointer">
       <input

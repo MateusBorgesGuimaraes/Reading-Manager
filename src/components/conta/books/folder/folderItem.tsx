@@ -1,5 +1,4 @@
 'use client';
-
 import FolderIcon from '@/icons/folderIcon';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,6 +9,7 @@ type FolderItemProps = {
   quantity: number;
   data: string;
   genero: string;
+  onDelete: () => void;
 };
 
 export default function FolderItem({
@@ -18,10 +18,11 @@ export default function FolderItem({
   quantity,
   genero,
   data,
+  onDelete,
 }: FolderItemProps) {
   return (
     <Link
-      href={`/books/${link}`}
+      href={`/conta/books/${link}`}
       className="p-3 bg-white min-w-48 rounded-lg shadow-sm flex flex-col gap-5 text-gray-500 hover:shadow-md duration-300 group"
     >
       <div className="flex justify-between items-center">
@@ -29,14 +30,19 @@ export default function FolderItem({
           color={color}
           className="group-hover:scale-125 duration-300"
         />
-        <button>
-          <Image
-            src={'/assets/icons/delete.svg'}
-            height={14}
-            width={14}
-            alt="deletar folder"
-          />
-        </button>
+        <div
+          onClick={(e) => e.preventDefault()}
+          className="bg-gray-100 p-1 flex items-center justify-center rounded-sm hover:scale-125 duration-300"
+        >
+          <button onClick={onDelete}>
+            <Image
+              src={'/assets/icons/delete.svg'}
+              height={14}
+              width={14}
+              alt="deletar folder"
+            />
+          </button>
+        </div>
       </div>
       <div className="space-y-2">
         <p>Items: {quantity}</p>

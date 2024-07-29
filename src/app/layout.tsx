@@ -5,6 +5,7 @@ import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
 import { UserContextProvider } from '@/context/user-context';
 import userGet from '@/actions/user-get';
+import { Toaster } from '@/components/ui/toaster';
 
 const kollektif = localFont({
   src: [
@@ -51,6 +52,7 @@ export default async function RootLayout({
         <UserContextProvider user={user}>
           <Header />
           {children}
+          <Toaster />
           <Footer />
         </UserContextProvider>
       </body>

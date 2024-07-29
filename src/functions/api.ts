@@ -17,3 +17,21 @@ export function USER_POST_REGISTER() {
     url: API_URL + '/users',
   };
 }
+
+export function FOLDER_POST() {
+  return {
+    url: API_URL + '/folders',
+  };
+}
+
+export function FOLDERS_GET() {
+  return {
+    url: API_URL + '/users/userFolders',
+  };
+}
+
+export function FOLDER_DELETE(id: string) {
+  return {
+    url: API_URL + '/folders/' + id,
+  };
+}
