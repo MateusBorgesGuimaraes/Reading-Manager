@@ -35,3 +35,9 @@ export function FOLDER_DELETE(id: string) {
     url: API_URL + '/folders/' + id,
   };
 }
+
+export function GET_BOOKS(id: String) {
+  return {
+    url: API_URL + '/folders/' + id,
+  };
+}
