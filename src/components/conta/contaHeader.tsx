@@ -17,12 +17,14 @@ export default function ContaHeader() {
 
   function defineTitle(pathname: string): string {
     switch (pathname) {
-      case '/conta/books':
+      case '/conta/folders':
         return 'Pastas';
       case '/conta/statistics':
         return 'Estatisticas';
-      default:
+      case '/conta':
         return 'Inicio';
+      default:
+        return 'None';
     }
   }
 
@@ -32,7 +34,9 @@ export default function ContaHeader() {
     <nav className="my-4">
       <ul className="flex sm:justify-between sm:flex-row flex-col">
         <div className="sm:mt-2 sm:mb-0 mb-2  self-center">
-          <TitleDec text={defineTitle(pathname)} />
+          {defineTitle(pathname) !== 'None' && (
+            <TitleDec text={defineTitle(pathname)} />
+          )}
         </div>
         <div className="flex smallest:gap-6 gap-6 justify-evenly">
           <ButtonContaHeader
@@ -51,7 +55,7 @@ export default function ContaHeader() {
 
           <ButtonContaHeader
             pathname={pathname}
-            link="/conta/books"
+            link="/conta/folders"
             alt="icone dos livros da pagina do usuario"
             icon="/assets/icons/book-dash.svg"
           />

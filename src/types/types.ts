@@ -27,6 +27,7 @@ export type UserAPI = {
 
 export type BookType = {
   bookname: string;
+  id: string;
   author: string;
   pagesNumber: number;
   stopInPage: number;

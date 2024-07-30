@@ -24,6 +24,7 @@ export default function Header() {
           alt="logo"
           width={100}
           height={65}
+          priority
         />
       </div>
 

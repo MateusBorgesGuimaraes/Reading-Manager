@@ -22,7 +22,7 @@ export default function FolderItem({
 }: FolderItemProps) {
   return (
     <Link
-      href={`/conta/books/${link}`}
+      href={`/conta/folders/${link}`}
       className="p-3 bg-white min-w-48 rounded-lg shadow-sm flex flex-col gap-5 text-gray-500 hover:shadow-md duration-300 group"
     >
       <div className="flex justify-between items-center">
