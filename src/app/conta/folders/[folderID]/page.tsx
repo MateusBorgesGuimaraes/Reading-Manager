@@ -1,6 +1,4 @@
-import BooksPage from '@/components/conta/books/book/booksPage';
-import CreateBookModal from '@/components/FormsCreatEdit/createBookModal';
-
+import BooksPageFull from '@/components/conta/books/book/booksPageFull';
 import React from 'react';
 
 type PageParams = {
@@ -12,8 +10,7 @@ type PageParams = {
 export default function FolderPage({ params }: PageParams) {
   return (
     <div className="my-8">
-      <BooksPage params={params} />
-      <CreateBookModal id={params.folderID} />
+      <BooksPageFull params={params.folderID} />
     </div>
   );
 }

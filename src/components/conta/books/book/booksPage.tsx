@@ -1,5 +1,6 @@
 'use client';
 
+import deleteBook from '@/actions/book-delete';
 import getBooksOfFolder from '@/actions/get-books';
 import {
   Table,
@@ -10,25 +11,25 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useToast } from '@/components/ui/use-toast';
 import defineColorByStatus from '@/functions/defineColorByStatus';
 import { formatarData } from '@/functions/formatData';
 import { BookType } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import React from 'react';
 
-type PageParams = {
-  params: {
-    folderID: string;
-  };
+type BooksPageProps = {
+  params: string;
+  books: BookType[];
+  setBooks: React.Dispatch<React.SetStateAction<BookType[]>>;
 };
 
-export default function BooksPage({ params }: PageParams) {
-  const [books, setBooks] = React.useState<BookType[] | null>(null);
+export default function BooksPage({ params, books, setBooks }: BooksPageProps) {
   const [errorGetBooks, setErrorGetBooks] = React.useState<null | boolean>(
     null,
   );
+  const { toast } = useToast();
 
   React.useEffect(() => {
     async function getBooksById(id: string) {
@@ -40,8 +41,25 @@ export default function BooksPage({ params }: PageParams) {
         console.log(data);
       }
     }
-    getBooksById(params.folderID);
-  }, [params]);
+    getBooksById(params);
+  }, [params, setBooks]);
+
+  const handleDeleteBook = async (idBook: string) => {
+    const result = await deleteBook(idBook);
+    if (result.ok) {
+      setBooks((prevBooks) => prevBooks.filter((book) => book.id !== idBook));
+      toast({
+        title: 'Livro deletado',
+        description: 'Livro deletado com sucesso',
+      });
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Oh não! Erro ao deletar o livro',
+        description: 'Algum problema ocorreu ao deletar o livro.',
+      });
+    }
+  };
 
   return (
     <Table>
@@ -81,7 +99,10 @@ export default function BooksPage({ params }: PageParams) {
             <TableCell>{formatarData(book.updatedAt)}</TableCell>
             <TableCell>{formatarData(book.createdAt)}</TableCell>
             <TableCell>
-              <button className="flex text-lg items-center justify-between p-2 w-full sm:gap-0 gap-4 rounded hover:text-red-500 hover:scale-110 duration-300">
+              <button
+                className="flex text-lg items-center justify-between p-2 w-full sm:gap-0 gap-4 rounded hover:text-red-500 hover:scale-110 duration-300 "
+                onClick={() => handleDeleteBook(book.id)}
+              >
                 excluir
                 <Image
                   src={`/assets/icons/delete.svg`}

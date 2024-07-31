@@ -4,15 +4,22 @@ import ButtonForm from '@/components/FormComponents/Button';
 import InputForm from '@/components/FormComponents/Input';
 import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import React from 'react';
-
-import postFolder from '@/actions/folder-post';
 import { useToast } from '../ui/use-toast';
 import { BookPost, booksPostSchema } from '@/zodSchema/bookPosts';
 import SelectForm from '../FormComponents/selectForm';
+import postBook from '@/actions/book-post';
+import { BookType } from '@/types/types';
 
-export default function CreateBookFormFolder() {
+type CreateBookFormFolderProps = {
+  folderId: string;
+  onBookCreated: (newBook: BookType) => void;
+};
+
+export default function CreateBookFormFolder({
+  folderId,
+  onBookCreated,
+}: CreateBookFormFolderProps) {
   const {
     handleSubmit,
     register,
@@ -23,40 +30,31 @@ export default function CreateBookFormFolder() {
     mode: 'onChange',
   });
 
-  const [error, setError] = React.useState('');
-
   const { toast } = useToast();
 
-  async function onSubmit(dataSend: FieldValues) {
-    console.log(dataSend);
-    // const folderStatus = await postFolder(dataSend);
-    // if (folderStatus.ok) {
-    //   toast({
-    //     title: 'Pasta adicionada',
-    //     description: `Nova pasta ${dataSend.name} criada com sucesso`,
-    //   });
-    //   reset();
-    //   onFolderCreated();
-    // } else {
-    //   setError('Erro ao postar o folder');
-    //   setTimeout(() => {
-    //     setError('');
-    //   }, 2000);
-
-    //   toast({
-    //     variant: 'destructive',
-    //     title: 'oh não! Erro ao criar a pasta',
-    //     description: 'Algum problema ocorreu ao criar a pasta.',
-    //   });
-    // }
+  async function onSubmit(dataSend: BookPost) {
+    const bookStatus = await postBook(dataSend, folderId);
+    if (bookStatus.ok) {
+      toast({
+        title: 'Pasta adicionada',
+        description: `Novo livro ${dataSend.bookname} criado com sucesso`,
+      });
+      reset();
+      onBookCreated(bookStatus.data);
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'oh não! Erro ao criar o livro',
+        description: 'Algum problema ocorreu ao criar o livro.',
+      });
+    }
   }
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full flex flex-col gap-4 items-center justify-center"
+      className="w-full flex flex-col gap-2 sm:gap-4 items-center justify-center"
     >
-      <div className="flex items-center gap-4 w-full">
+      <div className="flex items-center gap-2 sm:gap-4 w-full sm:flex-row flex-col">
         <div className="w-full">
           <InputForm
             name="bookname"
@@ -78,7 +76,7 @@ export default function CreateBookFormFolder() {
         </div>
       </div>
 
-      <div className="flex items-center gap-4 w-full">
+      <div className="flex items-center gap-2 sm:gap-4 w-full sm:flex-row flex-col">
         <div className="w-full">
           <InputForm
             name="pagesNumber"
@@ -100,7 +98,7 @@ export default function CreateBookFormFolder() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-4 w-full">
+      <div className="flex items-center justify-center gap-2 sm:gap-4 w-full sm:flex-row flex-col">
         <div className="w-full">
           <SelectForm
             name="statusOfreading"
@@ -121,6 +119,7 @@ export default function CreateBookFormFolder() {
             name="timeSpent"
             label="tempo gasto"
             type="text"
+            placehoder="00:00"
             register={register}
             error={errors.timeSpent?.message}
           />
@@ -132,7 +131,7 @@ export default function CreateBookFormFolder() {
       )} */}
 
       <div
-        className="flex gap-4 smallest:flex-nowrap
+        className="flex gap-2 sm:gap-4 smallest:flex-nowrap
       flex-wrap"
       ></div>
       <ButtonForm disabled={isSubmitting} text="CRIAR" />

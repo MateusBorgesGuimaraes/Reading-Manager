@@ -6,6 +6,7 @@ interface InputFormProps {
   type: string;
   register: any;
   error?: string;
+  placehoder?: string;
 }
 
 const InputForm: FC<InputFormProps> = ({
@@ -14,6 +15,7 @@ const InputForm: FC<InputFormProps> = ({
   type,
   register,
   error,
+  placehoder,
 }) => {
   return (
     <div className="flex flex-col w-full">
@@ -21,6 +23,7 @@ const InputForm: FC<InputFormProps> = ({
         {label}
       </label>
       <input
+        placeholder={placehoder}
         id={name}
         type={type}
         {...register(name)}

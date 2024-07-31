@@ -41,3 +41,20 @@ export function GET_BOOKS(id: String) {
     url: API_URL + '/folders/' + id,
   };
 }
+
+export function BOOK_POST() {
+  return {
+    url: API_URL + '/books',
+  };
+}
+export function BOOK_DELETE(id: string) {
+  return {
+    url: API_URL + '/books/' + id,
+  };
+}
+
+export function GET_BOOK(id: String) {
+  return {
+    url: API_URL + '/books/book/' + id,
+  };
+}

@@ -42,7 +42,9 @@ export type BookType = {
 export type MarkerType = {
   markerName: string;
   page: number;
-  content: string;
+  // content?: string;
+  // book: string;
   color: ColorOptions;
-  book: string;
+  createdAt: string;
+  id: string;
 };

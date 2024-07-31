@@ -9,11 +9,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-
 import React from 'react';
 import CreateBookFormFolder from './createBookForm';
+import { BookType } from '@/types/types';
 
-export default function CreateBookModal({ id }: { id: string }) {
+type CreateBookModalProps = {
+  id: string;
+  onBookCreated: (newBook: BookType) => void;
+};
+
+export default function CreateBookModal({
+  id,
+  onBookCreated,
+}: CreateBookModalProps) {
   return (
     <Dialog>
       <DialogTrigger>
@@ -21,7 +29,7 @@ export default function CreateBookModal({ id }: { id: string }) {
           <ButtonIconForm text="NOVO LIVRO" icon="/assets/icons/add-book.svg" />
         </div>
       </DialogTrigger>
-      <DialogContent className="min-w-[70%] min-h-[90%]">
+      <DialogContent className="md:min-w-[768px] min-w-full">
         <DialogHeader className="font-title text-2xl text-green-800  ">
           <DialogTitle>NOVA PASTA</DialogTitle>
 
@@ -30,7 +38,7 @@ export default function CreateBookModal({ id }: { id: string }) {
           </DialogDescription>
         </DialogHeader>
 
-        <CreateBookFormFolder />
+        <CreateBookFormFolder folderId={id} onBookCreated={onBookCreated} />
       </DialogContent>
     </Dialog>
   );
