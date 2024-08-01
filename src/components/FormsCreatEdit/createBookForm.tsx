@@ -126,10 +126,6 @@ export default function CreateBookFormFolder({
         </div>
       </div>
 
-      {/* {error && (
-        <p className="text-red-600 text-sm self-start -mt-4">{error}</p>
-      )} */}
-
       <div
         className="flex gap-2 sm:gap-4 smallest:flex-nowrap
       flex-wrap"

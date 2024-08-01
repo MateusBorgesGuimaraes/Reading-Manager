@@ -15,7 +15,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-export default function SingleBookMakers({ book }: { book: BookType }) {
+export default function SingleBookMakers({
+  book,
+  onBookUpdate,
+}: {
+  book: BookType;
+  onBookUpdate: () => void;
+}) {
+  const handleDeleteMarker = async (markerId: string) => {
+    // Aqui você deve adicionar a lógica para deletar o marcador
+    // Após deletar o marcador, chame a função onBookUpdate
+    // await onBookUpdate();
+  };
   return (
     <div>
       <Table>

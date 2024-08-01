@@ -58,3 +58,9 @@ export function GET_BOOK(id: String) {
     url: API_URL + '/books/book/' + id,
   };
 }
+
+export function MARKER_POST() {
+  return {
+    url: API_URL + '/markers',
+  };
+}

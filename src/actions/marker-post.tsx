@@ -1,26 +1,27 @@
 'use server';
 
-import { BOOK_POST } from '@/functions/api';
-import { BookPost } from '@/zodSchema/bookPosts';
+import { MARKER_POST } from '@/functions/api';
+import { MarkerPost } from '@/zodSchema/markerPost';
 import { cookies } from 'next/headers';
 
-export default async function postBook(data: BookPost, folderId: string) {
+export default async function postMarker(data: MarkerPost, bookId: string) {
   try {
     const token = cookies().get('token')?.value;
+    console.log(`token`, token);
 
     if (!token) throw new Error('Token não encontrado');
 
     const dadosTratados = {
-      folderId,
-      bookname: data.bookname,
-      author: data.author,
-      pagesNumber: +data.pagesNumber,
-      stopInPage: +data.stopInPage,
-      statusOfreading: data.statusOfreading,
-      timeSpent: data.timeSpent,
+      bookId,
+      markerName: data.markerName,
+      page: +data.page,
+      color: data.color,
+      content: data.content,
     };
 
-    const { url } = BOOK_POST();
+    console.log('dadosd tradadpds', dadosTratados);
+
+    const { url } = MARKER_POST();
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -44,6 +45,6 @@ export default async function postBook(data: BookPost, folderId: string) {
     return { data: dataRes, ok: true, error: '' };
   } catch (error: unknown) {
     console.log(error);
-    return { data: null, ok: false, error: 'Erro ao enviar Livro' };
+    return { data: null, ok: false, error: 'Erro ao enviar marker' };
   }
 }

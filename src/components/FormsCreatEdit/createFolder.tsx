@@ -75,77 +75,26 @@ export default function CreateFolder({
         className="flex gap-4 smallest:flex-nowrap
       flex-wrap"
       >
-        <ColorRadioButton
-          id="radio-azul"
-          name="color"
-          value="azul"
-          color={defineColor('azul')}
-          label=""
-          register={register}
-        />
-
-        <ColorRadioButton
-          id="radio-vermelho"
-          name="color"
-          value="vermelho"
-          color={defineColor('vermelho')}
-          label=""
-          register={register}
-        />
-
-        <ColorRadioButton
-          id="radio-laranja"
-          name="color"
-          value="laranja"
-          color={defineColor('laranja')}
-          label=""
-          register={register}
-        />
-
-        <ColorRadioButton
-          id="radio-roxo"
-          name="color"
-          value="roxo"
-          color={defineColor('roxo')}
-          label=""
-          register={register}
-        />
-
-        <ColorRadioButton
-          id="radio-verde"
-          name="color"
-          value="verde"
-          color={defineColor('verde')}
-          label=""
-          register={register}
-        />
-
-        <ColorRadioButton
-          id="radio-ciano"
-          name="color"
-          value="ciano"
-          color={defineColor('ciano')}
-          label=""
-          register={register}
-        />
-
-        <ColorRadioButton
-          id="radio-amarelo"
-          name="color"
-          value="amarelo"
-          color={defineColor('amarelo')}
-          label=""
-          register={register}
-        />
-
-        <ColorRadioButton
-          id="radio-cinza"
-          name="color"
-          value="cinza"
-          color={defineColor('cinza')}
-          label=""
-          register={register}
-        />
+        {[
+          'azul',
+          'vermelho',
+          'laranja',
+          'roxo',
+          'verde',
+          'ciano',
+          'amarelo',
+          'cinza',
+        ].map((color) => (
+          <ColorRadioButton
+            key={color}
+            id={`radio-${color}`}
+            name="color"
+            value={color}
+            color={defineColor(color)}
+            label=""
+            register={register}
+          />
+        ))}
       </div>
       <ButtonForm disabled={isSubmitting} text="CRIAR" />
     </form>
