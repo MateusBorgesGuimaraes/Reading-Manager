@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import AddMarkerForm from '../marker/addMarkerForm';
+import AttBookForm from '../book/attBookForm';
 
 export default function SingleBook({ id }: { id: string }) {
   const [book, setBook] = React.useState<BookType | null>(null);
@@ -103,7 +104,7 @@ export default function SingleBook({ id }: { id: string }) {
                   Atualize o status da sua leitura.
                 </DialogDescription>
               </DialogHeader>
-              conteudo
+              <AttBookForm book={book} onBookUpdate={handleBookUpdate} />
             </DialogContent>
           </Dialog>
         </div>

@@ -35,7 +35,6 @@ export default function AddMarkerForm({
   const { toast } = useToast();
 
   async function onSubmit(dataSend: MarkerPost) {
-    console.log(dataSend);
     const bookStatus = await postMarker(dataSend, bookId);
     if (bookStatus.ok) {
       toast({

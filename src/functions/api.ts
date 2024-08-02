@@ -64,3 +64,21 @@ export function MARKER_POST() {
     url: API_URL + '/markers',
   };
 }
+
+export function BOOK_PUT(id: string) {
+  return {
+    url: API_URL + '/books/' + id,
+  };
+}
+
+export function MARKER_DELETE(id: string) {
+  return {
+    url: API_URL + '/markers/' + id,
+  };
+}
+
+export function GET_MARKER(id: String) {
+  return {
+    url: API_URL + '/markers/' + id,
+  };
+}

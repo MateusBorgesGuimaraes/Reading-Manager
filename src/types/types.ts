@@ -39,6 +39,20 @@ export type BookType = {
   markers: MarkerType[];
 };
 
+export type BookType2 = {
+  bookname: string;
+  id: string;
+  author: string;
+  pagesNumber: number;
+  stopInPage: number;
+  statusOfreading: ReadingStatus;
+  timeSpent: string;
+  folder: string;
+  createdAt: Date;
+  updatedAt: Date;
+  markers: string[];
+};
+
 export type MarkerType = {
   markerName: string;
   page: number;

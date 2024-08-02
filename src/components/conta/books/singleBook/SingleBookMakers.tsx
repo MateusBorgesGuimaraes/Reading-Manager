@@ -1,3 +1,4 @@
+import markerDelete from '@/actions/marker-delete';
 import {
   Table,
   TableBody,
@@ -7,8 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useToast } from '@/components/ui/use-toast';
 import defineColor from '@/functions/defineColor';
-import defineColorByStatus from '@/functions/defineColorByStatus';
 import { formatarData } from '@/functions/formatData';
 import { BookType } from '@/types/types';
 import Image from 'next/image';
@@ -22,10 +23,22 @@ export default function SingleBookMakers({
   book: BookType;
   onBookUpdate: () => void;
 }) {
+  const { toast } = useToast();
   const handleDeleteMarker = async (markerId: string) => {
-    // Aqui você deve adicionar a lógica para deletar o marcador
-    // Após deletar o marcador, chame a função onBookUpdate
-    // await onBookUpdate();
+    const result = await markerDelete(markerId);
+    if (result.ok) {
+      toast({
+        title: 'Marcador deletado',
+        description: 'Marcador deletado com sucesso',
+      });
+      await onBookUpdate();
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Oh não! Erro ao deletar o marcador',
+        description: 'Algum problema ocorreu ao deletar o marcador.',
+      });
+    }
   };
   return (
     <div>
@@ -54,7 +67,7 @@ export default function SingleBookMakers({
           {book.markers?.map((marker) => (
             <TableRow key={marker.id}>
               <TableCell className="text-blue-600 underline">
-                <Link href={`/conta/book/${marker.id}`}>ver mais</Link>
+                <Link href={`/conta/book/marker/${marker.id}`}>ver mais</Link>
               </TableCell>
               <TableCell
                 style={{
@@ -68,7 +81,7 @@ export default function SingleBookMakers({
               <TableCell>
                 <button
                   className="flex text-lg items-center justify-between p-2 w-full sm:gap-0 gap-4 rounded hover:text-red-500 hover:scale-110 duration-300 "
-                  // onClick={() => handleDeleteBook(book.id)}
+                  onClick={() => handleDeleteMarker(marker.id)}
                 >
                   excluir
                   <Image
