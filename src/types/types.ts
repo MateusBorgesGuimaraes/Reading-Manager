@@ -21,8 +21,6 @@ export type FolderAPI = {
 export type UserAPI = {
   username: string;
   email: string;
-  // token: string;
-  // folders: FolderAPI[];
 };
 
 export type BookType = {
@@ -56,9 +54,28 @@ export type BookType2 = {
 export type MarkerType = {
   markerName: string;
   page: number;
-  // content?: string;
-  // book: string;
   color: ColorOptions;
   createdAt: string;
   id: string;
+};
+
+type BooksByCategory = Record<string, number>;
+
+type MarkersByBook = Record<string, number>;
+
+type BooksByStatus = {
+  completo: number;
+  lendo: number;
+  dropado: number;
+  pausado: number;
+};
+
+export type StatsData = {
+  totalBooks: number;
+  booksByCategory: BooksByCategory;
+  totalMarkers: number;
+  markersByBook: MarkersByBook;
+  booksByStatus: BooksByStatus;
+  completionRate: number;
+  totalReadingTime: number;
 };

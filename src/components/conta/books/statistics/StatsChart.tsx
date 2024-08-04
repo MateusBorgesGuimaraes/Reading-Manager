@@ -10,69 +10,20 @@ import {
   ChartLegendContent,
 } from '@/components/ui/chart';
 
-const chartData = [
-  {
-    genero: 'fantasia',
-    quantidade: 15,
-    fill: '#8B5CF6',
-  },
-  {
-    genero: 'terror',
-    quantidade: 12,
-    fill: '#22C55E',
-  },
-  {
-    genero: 'aventura',
-    quantidade: 10,
-    fill: '#F97',
-  },
-  {
-    genero: 'romance',
-    quantidade: 8,
-    fill: '#EAB308',
-  },
-  {
-    genero: 'classicos',
-    quantidade: 8,
-    fill: '#EF4444',
-  },
-];
+type StatsChartProps = {
+  data: { genero: string; quantidade: number; fill: string }[];
+  config: ChartConfig;
+};
 
-const chartConfig = {
-  generos: {
-    label: 'Generos',
-  },
-  terror: {
-    label: 'terror',
-    color: 'hsl(var(--chart-1))',
-  },
-  aventura: {
-    label: 'aventura',
-    color: 'hsl(var(--chart-2))',
-  },
-  romance: {
-    label: 'romance',
-    color: 'hsl(var(--chart-3))',
-  },
-  classicos: {
-    label: 'classicos',
-    color: 'hsl(var(--chart-4))',
-  },
-  fantasia: {
-    label: 'fantasia',
-    color: 'hsl(var(--chart-5))',
-  },
-} satisfies ChartConfig;
-
-export default function StatsChart() {
+const StatsChart: React.FC<StatsChartProps> = ({ data, config }) => {
   return (
     <div>
       <ChartContainer
-        config={chartConfig}
+        config={config}
         className="mx-auto aspect-square max-h-[300px]"
       >
-        <PieChart className="lowercase  text-gray-600">
-          <Pie data={chartData} dataKey="quantidade" />
+        <PieChart className="lowercase text-gray-600">
+          <Pie data={data} dataKey="quantidade" nameKey="genero" />
           <ChartLegend
             content={<ChartLegendContent nameKey="genero" />}
             className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
@@ -81,4 +32,6 @@ export default function StatsChart() {
       </ChartContainer>
     </div>
   );
-}
+};
+
+export default StatsChart;

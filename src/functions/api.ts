@@ -82,3 +82,9 @@ export function GET_MARKER(id: String) {
     url: API_URL + '/markers/' + id,
   };
 }
+
+export function GET_USER_STATS() {
+  return {
+    url: API_URL + '/statistics/user',
+  };
+}

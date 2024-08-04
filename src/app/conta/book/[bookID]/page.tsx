@@ -1,11 +1,16 @@
 import SingleBook from '@/components/conta/books/singleBook/SingleBook';
-import ButtonIconForm from '@/components/FormComponents/ButtonIcon';
+import { Metadata } from 'next';
 import React from 'react';
 
 type PageParams = {
   params: {
     bookID: string;
   };
+};
+
+export const metadata: Metadata = {
+  title: 'Reading Manager',
+  description: 'Livro',
 };
 
 export default function SingleBookPage({ params }: PageParams) {
